@@ -84,20 +84,20 @@ function Login() {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const session = await getSession(context)
+// export const getServerSideProps: GetServerSideProps = async (context) => {
+//   const session = await getSession(context)
 
-  if (session) {
-    return {
-      redirect: {
-        destination: '/home',
-        parmanent: false
-      }
-    }
-  }
+//   if (session) {
+//     return {
+//       redirect: {
+//         destination: '/home',
+//         parmanent: false
+//       }
+//     }
+//   }
 
-  return {
-  }
-}
+//   return {
+//   }
+// }
 
 export default Login;

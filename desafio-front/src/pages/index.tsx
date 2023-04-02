@@ -1,16 +1,13 @@
 import {
-  Button,
   Flex,
   Heading,
   Image,
-  Link,
-  LinkBox,
   Stack,
   Text,
-  useBreakpointValue,
-  MagicLink,
+  Link,
   LinkOverlay
 } from '@chakra-ui/react';
+
 
 export default function SplitScreen() {
   return (
@@ -39,11 +36,11 @@ export default function SplitScreen() {
             </Text>{' '}
           </Heading>
           <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}>
-            The project board is an exclusive resource for contract work. It's
-            perfect for freelancers, agencies, and moonlighters.
+            Bem-vindo ao Faça Conexões! Nossa missão é inspirar e fortalecer a
+            criação de laços valiosos entre pessoas e ideias.
           </Text>
           <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
-            <LinkOverlay
+            <Link
               href='/login'
               rounded={'full'}
               border={'4px'}
@@ -54,8 +51,8 @@ export default function SplitScreen() {
                 bg: 'blue.500',
               }}>
               Faça login
-            </LinkOverlay>
-            <LinkOverlay
+            </Link>
+            <Link
               href='/register'
               border={'4px'}
               borderColor={'white'}
@@ -63,7 +60,7 @@ export default function SplitScreen() {
               color={'Black'}
               rounded={'full'}>
               Crie sua conta
-            </LinkOverlay>
+            </Link>
           </Stack>
         </Stack>
       </Flex>

@@ -2,7 +2,7 @@ import { Box, Button, Flex, Input, InputGroup, InputLeftElement, Link, Text, use
 import { FiGithub, FiLock, FiUser } from 'react-icons/fi'
 import { BsTelephoneFill } from "react-icons/bs"
 
-function Login() {
+function Register() {
   const theme = useTheme();
 
   return (
@@ -83,4 +83,4 @@ function Login() {
   )
 }
 
-export default Login;
+export default Register;
