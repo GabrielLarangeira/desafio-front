@@ -32,7 +32,7 @@ export default function SplitScreen() {
             </Text>
             <br />{' '}
             <Text color={'blue.600'} as={'span'}>
-              Faça novas conecções
+              Faça novas conexões
             </Text>{' '}
           </Heading>
           <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}>
