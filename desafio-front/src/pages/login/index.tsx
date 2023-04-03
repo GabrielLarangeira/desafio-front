@@ -1,10 +1,36 @@
-import { Box, Button, Flex, Input, InputGroup, InputLeftElement, Link, Text, useTheme } from "@chakra-ui/react";
-import { GetServerSideProps } from "next";
-import { getSession, signIn } from "next-auth/react";
+import { Box, Button, Flex, FormControl, Input, InputGroup, InputLeftElement, Link, Text, useTheme } from "@chakra-ui/react";
+import { useForm } from "react-hook-form";
 import { FiGithub, FiLock, FiUser } from 'react-icons/fi'
+import * as yup from 'yup'
+import { IUserLogin } from "@/types";
+import { useState } from "react";
+import { yupResolver } from "@hookform/resolvers/yup"
+import { useAuth } from "@/contexts/authContexts";
 
 function Login() {
   const theme = useTheme();
+
+  const [inputEmail, setInputEmail] = useState("")
+  const [inputPassword, setInputPassword] = useState("")
+
+  const { login } = useAuth()
+
+  const formschame = yup.object().shape({
+    email: yup.string().email("deve ser um email válido").
+      required("e-mail obrigatório"),
+    password: yup.string().required("Senha é obrigatória")
+  })
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<IUserLogin>({
+    resolver: yupResolver(formschame)
+  })
+
+  const onFormSubmit = (formData: IUserLogin) => {
+    login(formData)
+  }
 
   return (
     <Flex
@@ -23,19 +49,26 @@ function Login() {
             fontFamily="heading"
             fontWeight={600}
             marginBottom="2rem">Logue em sua conta</Text>
-          <InputGroup>
-            <InputLeftElement
-              pointerEvents='none'
-            >
-              <FiUser color={theme.colors.gray['500']} />
-            </InputLeftElement>
-            <Input
-              placeholder="Email"
-              marginBottom="1rem"
-              borderColor="gray.700"
-              backgroundColor="gray.700"
-              color="gray.100" />
-          </InputGroup>
+          <FormControl>
+            <InputGroup>
+              <InputLeftElement
+                pointerEvents='none'
+              >
+                <FiUser color={theme.colors.gray['500']} />
+              </InputLeftElement>
+              <Input
+                placeholder="Email"
+                type="email"
+                marginBottom="1rem"
+                borderColor="gray.700"
+                backgroundColor="gray.700"
+                color="gray.100"
+                {...register("email")}
+                onChange={(e) => setInputEmail(e.target.value)}
+              />
+
+            </InputGroup>
+          </FormControl>
           <InputGroup>
             <InputLeftElement
               pointerEvents='none'
@@ -47,7 +80,10 @@ function Login() {
               borderColor="gray.700"
               backgroundColor="gray.700"
               color="gray.100"
-              type="password" />
+              type="password"
+              {...register("password")}
+              onChange={(e) => setInputPassword(e.target.value)}
+            />
           </InputGroup>
 
           <Flex direction="column" alignItems="center">
@@ -58,7 +94,7 @@ function Login() {
               width="100%"
               backgroundColor="secondary.500"
               _hover={{ backgroundColor: "secondary.600" }}
-              onClick={() => signIn()}>Entrar</Button>
+              onClick={handleSubmit(onFormSubmit)}>Entrar</Button>
             <Link
               href="/register"
               color="gray.100">
@@ -83,21 +119,5 @@ function Login() {
     </Flex>
   )
 }
-
-// export const getServerSideProps: GetServerSideProps = async (context) => {
-//   const session = await getSession(context)
-
-//   if (session) {
-//     return {
-//       redirect: {
-//         destination: '/home',
-//         parmanent: false
-//       }
-//     }
-//   }
-
-//   return {
-//   }
-// }
 
 export default Login;

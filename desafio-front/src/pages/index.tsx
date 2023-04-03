@@ -5,7 +5,7 @@ import {
   Stack,
   Text,
   Link,
-  LinkOverlay
+
 } from '@chakra-ui/react';
 
 
@@ -43,7 +43,7 @@ export default function SplitScreen() {
             <Link
               href='/login'
               rounded={'full'}
-              border={'4px'}
+              border={'8px'}
               borderColor={'blue.500'}
               bg={'blue.500'}
               color={'white'}
@@ -54,7 +54,7 @@ export default function SplitScreen() {
             </Link>
             <Link
               href='/register'
-              border={'4px'}
+              border={'8px'}
               borderColor={'white'}
               bg={'white'}
               color={'Black'}
